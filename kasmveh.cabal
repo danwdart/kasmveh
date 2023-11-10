@@ -1,0 +1,119 @@
+cabal-version:       3.4
+-- Newer versions complain
+name:                kasmveh
+version:             0.1.0.0
+-- synopsis:
+description:         Playing with assemblery stuff 
+homepage:            https://github.com/danwdart/kasmveh#readme
+license:             AGPL-3.0-only
+-- license-file:        LICENSE
+author:              Dan Dart
+maintainer:          cabal@dandart.co.uk
+copyright:           2019 Dan Dart
+category:            Web
+build-type:          Simple
+extra-source-files:
+                     README.md
+
+common shared-properties-base
+  hs-source-dirs:      src
+  default-language:    GHC2021
+  default-extensions:  DerivingStrategies, UnicodeSyntax, ImportQualifiedPost
+  ghcjs-options:       -dedupe
+
+common shared-properties-lib
+  import: shared-properties-base
+  ghc-options:
+    -Weverything
+    -Wno-compat-unqualified-imports
+    -Wno-implicit-prelude
+    -Wno-inferred-safe-imports
+    -Wno-missing-deriving-strategies
+    -Wno-missing-export-lists
+    -Wno-missing-import-lists
+    -Wno-missing-kind-signatures
+    -Werror
+    -haddock
+  build-depends:       base >= 4.17.0.0 && < 5
+  default-extensions:
+    DerivingStrategies
+    UnicodeSyntax
+    NoGeneralizedNewtypeDeriving
+    ImportQualifiedPost
+
+common shared-properties-unsafe
+  import: shared-properties-base
+  ghc-options:
+    -Weverything
+    -Wno-compat-unqualified-imports
+    -Wno-implicit-prelude
+    -Wno-inferred-safe-imports
+    -Wno-missing-deriving-strategies
+    -Wno-missing-export-lists
+    -Wno-missing-import-lists
+    -Wno-missing-kind-signatures
+    -Werror
+    -haddock
+    -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base >= 4.17.0.0 && < 5
+  default-extensions:
+    DerivingStrategies
+    UnicodeSyntax
+    NoGeneralizedNewtypeDeriving
+    ImportQualifiedPost
+
+common shared-properties-safe
+  import: shared-properties-unsafe
+  default-extensions:
+    DerivingStrategies
+    UnicodeSyntax
+    NoGeneralizedNewtypeDeriving
+    ImportQualifiedPost
+    Safe
+
+common shared-properties-nobase
+  import: shared-properties-base
+  ghc-options:
+    -Weverything
+    -Wno-compat-unqualified-imports
+    -Wno-implicit-prelude
+    -Wno-inferred-safe-imports
+    -Wno-missing-deriving-strategies
+    -Wno-missing-export-lists
+    -Wno-missing-import-lists
+    -Wno-missing-kind-signatures
+    -Werror
+    -haddock
+    -threaded -rtsopts -with-rtsopts=-N
+  default-extensions:
+    DerivingStrategies
+    UnicodeSyntax
+    ImportQualifiedPost
+
+-- executable kasmveh
+--   import: shared-properties-unsafe
+--   main-is:             Main.hs
+--   build-depends:       base >= 4.17.0.0 && < 5, kasmveh
+
+-- TODO: unsafe?
+library
+  import: shared-properties-lib
+  --ghc-options: -Wno-unused-packages
+  hs-source-dirs:      lib, examples
+  build-depends: base >= 4.17.0.0 && < 5, containers, nonempty-containers, pretty-simple
+  exposed-modules:     Code
+                     , Example1
+                     , Machine
+
+
+test-suite test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  default-language:    GHC2021
+  default-extensions:  DerivingStrategies, UnicodeSyntax, NoGeneralizedNewtypeDeriving, ImportQualifiedPost
+  build-depends:       base >= 4.17.0.0 && < 5
+                     , kasmveh
+                     , hspec
+                     , QuickCheck
+  other-modules:       
