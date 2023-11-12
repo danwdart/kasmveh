@@ -34,7 +34,6 @@ data Machine = Machine {
 totalRAM :: Addr
 totalRAM = 16
 
--- initial :: 
 initial :: ROM -> Machine
 initial rom' = Machine {
     cpu = CPU {
