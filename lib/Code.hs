@@ -1,4 +1,5 @@
-{-# LANGUAGE GeneralisedNewtypeDeriving, Unsafe #-}
+{-# LANGUAGE GeneralisedNewtypeDeriving #-}
+{-# LANGUAGE Unsafe                     #-}
 {-# OPTIONS_GHC -Wno-unsafe #-}
 
 module Code where
@@ -55,7 +56,7 @@ data OpFrom = OpImm MWord | OpFromReg Reg | OpFromRAM Addr | OpFromROM Addr | Op
 data OpWith = OpWithReg Reg | OpWithRAM Addr | OpWithROM Addr | OpWithIO FromIOAddr -- @TODO consolidate and translate from/to bus?
     deriving stock (Show)
 
-data OpTo = OpToReg Reg | OpToRAM Addr | OpToIO ToIOAddr    
+data OpTo = OpToReg Reg | OpToRAM Addr | OpToIO ToIOAddr
     deriving stock (Show)
 
 data UnaryOperation = Const OpFrom | Negate OpFrom
@@ -79,33 +80,33 @@ newtype Code = Code {
     deriving stock (Show)
     deriving newtype (Semigroup)
 
-one :: (a -> Instruction) -> a -> Code
+one ∷ (a → Instruction) → a → Code
 one inst a = Code . NES.singleton $ inst a
 
-two :: (a -> b -> Instruction) -> a -> b -> Code
+two ∷ (a → b → Instruction) → a → b → Code
 two inst a b = Code . NES.singleton $ inst a b
 
-three :: (a -> b -> c -> Instruction) -> a -> b -> c -> Code
+three ∷ (a → b → c → Instruction) → a → b → c → Code
 three inst a b c = Code . NES.singleton $ inst a b c
 
-copyIf :: Cond -> OpTo -> Operation -> Code
+copyIf ∷ Cond → OpTo → Operation → Code
 copyIf = three Copy
 
-copy :: OpTo -> Operation -> Code
+copy ∷ OpTo → Operation → Code
 copy = copyIf Always
 
-branchIf :: Cond -> Addr -> Code
+branchIf ∷ Cond → Addr → Code
 branchIf = two Branch
 
-branch :: Addr -> Code
+branch ∷ Addr → Code
 branch = branchIf Always
 
-haltIf :: Cond -> Code
+haltIf ∷ Cond → Code
 haltIf = one Halt
 
-halt :: Code
+halt ∷ Code
 halt = haltIf Always
 
 -- ehhh it's okay, it's not a monad
-(>>) :: Code -> Code -> Code
+(>>) ∷ Code → Code → Code
 (>>) = (<>)
