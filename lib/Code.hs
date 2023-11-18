@@ -44,10 +44,10 @@ data Cond = Is Flag | Not Flag | Always
 type MWord = Int8
 type Addr = Word8
 
-data FromIOAddr = FromKeyboard Addr | FromNetworkInterface Addr | FromAudioInterface Addr
+data FromIOAddr = FromKeyboard Addr | FromNetworkInterface Addr | FromAudioInterface Addr | FromSystemConfigurationInterface Addr
     deriving stock (Show)
 
-data ToIOAddr = ToScreen Addr | ToNetworkInterface Addr | ToAudioInterface Addr
+data ToIOAddr = ToScreen Addr | ToNetworkInterface Addr | ToAudioInterface Addr | ToSystemConfigurationInterface Addr
     deriving stock (Show)
 
 data OpFrom = OpImm MWord | OpFromReg Reg | OpFromRAM Addr | OpFromROM Addr | OpFromIO FromIOAddr -- @TODO consolidate and translate from/to bus?
