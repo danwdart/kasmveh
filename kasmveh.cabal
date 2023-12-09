@@ -90,21 +90,33 @@ common shared-properties-nobase
     UnicodeSyntax
     ImportQualifiedPost
 
--- executable kasmveh
---   import: shared-properties-unsafe
---   main-is:             Main.hs
---   build-depends:       base >= 4.17.0.0 && < 5, kasmveh
-
 -- TODO: unsafe?
 library
   import: shared-properties-lib
   --ghc-options: -Wno-unused-packages
-  hs-source-dirs:      lib, examples
-  build-depends: base >= 4.17.0.0 && < 5, containers, nonempty-containers, pretty-simple
+  hs-source-dirs:      lib
+  build-depends: base >= 4.17.0.0 && < 5, array, containers, lens, mtl, nonempty-containers
+    -- pretty-simple
   exposed-modules:     Code
-                     , Example1
+                     , Interpret
                      , Machine
 
+executable kasmveh
+  import: shared-properties-unsafe
+  main-is:             Main.hs
+  build-depends:       base >= 4.17.0.0 && < 5, kasmveh
+
+executable example1
+  import: shared-properties-unsafe
+  hs-source-dirs:      examples
+  main-is:             Example1.hs
+  build-depends:       base >= 4.17.0.0 && < 5, kasmveh
+
+executable fizzbuzz
+  import: shared-properties-unsafe
+  hs-source-dirs:      examples
+  main-is:             FizzBuzz.hs
+  build-depends:       base >= 4.17.0.0 && < 5, kasmveh
 
 test-suite test
   type:                exitcode-stdio-1.0

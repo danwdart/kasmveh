@@ -4,18 +4,18 @@
 module Machine where
 
 import Code
-import Data.Map (Map)
+import Data.Array
 import Data.Map qualified as M
 
 data CPU = CPU {
-    regs  :: Map Reg MWord,
-    flags :: Map Flag Bool
+    regs  :: Regs,
+    flags :: Flags
 }
 
 type ROM = Code
 
 newtype RAM = RAM {
-    getRAM :: Map Addr MWord
+    getRAM :: Array Addr MWord
 }
 
 {-}
@@ -50,7 +50,7 @@ newtype Shadowed a = Shadowed {
 data Machine = Machine {
     cpu      :: CPU,
     rom      :: ROM,
-    ram :: RAM
+    ram      :: RAM
     {-}
     generalRAM :: RAM,
     videoRAM :: RAM,
@@ -80,11 +80,11 @@ totalRAM = 16
 initial ∷ ROM → Machine
 initial rom' = Machine {
     cpu = CPU {
-        regs = M.empty,
-        flags = M.empty
+        regs = defaultRegs,
+        flags = defaultFlags
     },
     rom = rom',
-    ram = RAM $ M.fromList (map (, 0) [0..totalRAM - 1])
+    ram = RAM $ listArray (0, totalRAM - 1) (fmap (const 0) [0..totalRAM - 1 :: Addr])
     {-}
     generalRAM = RAM $ M.fromList (map (, 0) [0..totalGeneralRAM - 1]),
     videoRAM = RAM $ M.fromList (map (, 0) [0..totalVideoRAM - 1]),

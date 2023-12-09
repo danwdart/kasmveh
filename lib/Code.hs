@@ -1,42 +1,44 @@
 {-# LANGUAGE GeneralisedNewtypeDeriving #-}
 {-# LANGUAGE Unsafe                     #-}
 {-# OPTIONS_GHC -Wno-unsafe #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 module Code where
+
 import Data.Int
 import Data.Word
 -- import Data.Map qualified as M
 -- import Data.Map (Map)
 import Data.Sequence.NonEmpty as NES
+import Data.Ix
+import GHC.Arr
 
 -- import Data.Vector.NonEmpty -- use once compiled up
 -- import Data.Sequence.NonEmpty -- use when putting together in pseudo-monads or free monads
 
 data Reg = A | B | C | D | O | IP
-    deriving stock (Show)
+    deriving stock (Show, Eq, Ord, Bounded, Enum, Ix)
 
 {-}
-consolidate? lens?
-data Regs a = Regs {
-    a :: a,
-    b :: a,
-    c :: a,
-    d :: a,
-    o :: a,
-    ip :: a
-}
+-- consolidate? lens?
 -}
+type Regs = Array Reg MWord
+
+defaultRegs :: Regs
+defaultRegs = listArray (minBound, maxBound) (fmap (const 0) [minBound..maxBound :: MWord])
+
+-- can we index using a sum type? Or is it that we use aliases? But each record must be the same.
+-- Or must it? To extend it should be extendable... maybe it should just be an index after all?
 
 data Flag = Zero | Carry
-    deriving stock (Show)
+    deriving stock (Show, Eq, Ord, Bounded, Enum, Ix)
 
-{-
-consolidate? lens?
-data Flags = Flags {
-    zero :: Bool,
-    carry :: Bool
-}
--}
+-- consolidate? lens?
+
+type Flags = Array Flag Bool
+
+defaultFlags :: Flags
+defaultFlags = listArray (minBound, maxBound) (fmap (const False) [minBound..maxBound :: Bool])
 
 data Cond = Is Flag | Not Flag | Always
     deriving stock (Show)
@@ -81,13 +83,13 @@ newtype Code = Code {
     deriving newtype (Semigroup)
 
 one ∷ (a → Instruction) → a → Code
-one inst a = Code . NES.singleton $ inst a
+one inst a' = Code . NES.singleton $ inst a'
 
 two ∷ (a → b → Instruction) → a → b → Code
-two inst a b = Code . NES.singleton $ inst a b
+two inst a' b' = Code . NES.singleton $ inst a' b'
 
 three ∷ (a → b → c → Instruction) → a → b → c → Code
-three inst a b c = Code . NES.singleton $ inst a b c
+three inst a' b' c' = Code . NES.singleton $ inst a' b' c'
 
 copyIf ∷ Cond → OpTo → Operation → Code
 copyIf = three Copy
