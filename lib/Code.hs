@@ -16,7 +16,7 @@ import GHC.Arr
 -- import Data.Vector.NonEmpty -- use once compiled up
 -- import Data.Sequence.NonEmpty -- use when putting together in pseudo-monads or free monads
 
-data Reg = A | B | C | D | O | IP
+data Reg = A | B | C | D | O
     deriving stock (Show, Eq, Ord, Bounded, Enum, Ix)
 
 {-}

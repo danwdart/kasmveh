@@ -5,18 +5,19 @@ module Machine where
 
 import Code
 import Data.Array
-import Data.Map qualified as M
+-- import Data.Map qualified as M
 
 data CPU = CPU {
     regs  :: Regs,
+    ip :: Addr,
     flags :: Flags
-}
+} deriving (Show)
 
 type ROM = Code
 
 newtype RAM = RAM {
     getRAM :: Array Addr MWord
-}
+} deriving (Show)
 
 {-}
 data KeyboardStatus = KeyboardStatusBusy | KeyboardStatusIdle | KeyboardStatusReady
@@ -59,7 +60,7 @@ data Machine = Machine {
     -}
     
     -- ioRegion :: IORegion
-}
+} deriving stock (Show)
 
 {-}
 totalGeneralRAM ∷ Addr
@@ -80,6 +81,7 @@ totalRAM = 16
 initial ∷ ROM → Machine
 initial rom' = Machine {
     cpu = CPU {
+        ip = 0,
         regs = defaultRegs,
         flags = defaultFlags
     },
@@ -94,10 +96,3 @@ initial rom' = Machine {
     -- ioRegion = IORegion M.empty
     -}
 }
-
-
-data FromIOAddr = FromKeyboard Addr | FromNetworkInterface Addr | FromAudioInterface Addr | FromSystemConfigurationInterface Addr
-    deriving stock (Show)
-
-data ToIOAddr = ToScreen Addr | ToNetworkInterface Addr | ToAudioInterface Addr | ToSystemConfigurationInterface Addr
-    deriving stock (Show)

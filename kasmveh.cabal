@@ -95,7 +95,7 @@ library
   import: shared-properties-lib
   --ghc-options: -Wno-unused-packages
   hs-source-dirs:      lib
-  build-depends: base >= 4.17.0.0 && < 5, array, containers, lens, mtl, nonempty-containers
+  build-depends: base >= 4.17.0.0 && < 5, array, containers, mtl, nonempty-containers, vector
     -- pretty-simple
   exposed-modules:     Code
                      , Interpret
@@ -105,6 +105,15 @@ executable kasmveh
   import: shared-properties-unsafe
   main-is:             Main.hs
   build-depends:       base >= 4.17.0.0 && < 5, kasmveh
+
+executable kasmveh-dev
+  import: shared-properties-unsafe
+  hs-source-dirs:      src, lib
+  main-is:             Main.hs
+  build-depends:       base >= 4.17.0.0 && < 5, array, containers, mtl, nonempty-containers, vector
+  other-modules:       Code
+                     , Interpret
+                     , Machine
 
 executable example1
   import: shared-properties-unsafe
