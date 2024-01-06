@@ -1,5 +1,5 @@
 {-# LANGUAGE QualifiedDo #-}
-{-# LANGUAGE Unsafe #-}
+{-# LANGUAGE Unsafe      #-}
 {-# OPTIONS_GHC -Wno-unsafe #-}
 
 module Main where
@@ -9,7 +9,7 @@ import Data.Char
 import Interpret
 import Machine
 
-code :: Code
+code ∷ Code
 code = Code.do
     copy screenRAMStart a
     halt
@@ -17,7 +17,7 @@ code = Code.do
             screenRAMStart = OpToIO (ToScreen 0)
             a = Unary (Const (OpImm (fromIntegral (ord 'A'))))
 
-main :: IO ()
+main ∷ IO ()
 main = do
     (_machine, debug) <- run . initial $ code
     -- print machine

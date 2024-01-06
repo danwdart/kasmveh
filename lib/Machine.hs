@@ -9,7 +9,7 @@ import Data.Array
 
 data CPU = CPU {
     regs  :: Regs,
-    ip :: Addr,
+    ip    :: Addr,
     flags :: Flags
 } deriving (Show)
 
@@ -34,7 +34,7 @@ initialKeyboard = Keyboard KeyboardStatusIdle Nothing
 
 data NetworkStatus = NetworkStatusBusy | NetworkStatusIdle | NetworkStatusReady
 
-type NetworkData = String 
+type NetworkData = String
 
 data Network = Network {
     status :: NetworkStatus,
@@ -49,16 +49,16 @@ newtype Shadowed a = Shadowed {
  -- @TODO translate bus address to rom and ram address and do IO if using the IO region.
 
 data Machine = Machine {
-    cpu      :: CPU,
-    rom      :: ROM,
-    ram      :: RAM
+    cpu :: CPU,
+    rom :: ROM,
+    ram :: RAM
     {-}
     generalRAM :: RAM,
     videoRAM :: RAM,
     keyboard :: Shadowed Keyboard,
     network :: Shadowed Network
     -}
-    
+
     -- ioRegion :: IORegion
 } deriving stock (Show)
 
@@ -75,7 +75,7 @@ totalVideoRAM = columns * rows * bytesPerCharacterSprite where
         bytesForColour = 1
 -}
 
-totalRAM :: Addr
+totalRAM ∷ Addr
 totalRAM = 16
 
 initial ∷ ROM → Machine

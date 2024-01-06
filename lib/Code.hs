@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralisedNewtypeDeriving #-}
 {-# LANGUAGE Unsafe                     #-}
 {-# OPTIONS_GHC -Wno-unsafe #-}
-{-# LANGUAGE TemplateHaskell #-}
+
 
 module Code where
 
@@ -9,8 +9,8 @@ import Data.Int
 import Data.Word
 -- import Data.Map qualified as M
 -- import Data.Map (Map)
-import Data.Sequence.NonEmpty as NES
 import Data.Ix
+import Data.Sequence.NonEmpty as NES
 import GHC.Arr
 
 -- import Data.Vector.NonEmpty -- use once compiled up
@@ -24,7 +24,7 @@ data Reg = A | B | C | D | O
 -}
 type Regs = Array Reg MWord
 
-defaultRegs :: Regs
+defaultRegs ∷ Regs
 defaultRegs = listArray (minBound, maxBound) (fmap (const 0) [minBound..maxBound :: MWord])
 
 -- can we index using a sum type? Or is it that we use aliases? But each record must be the same.
@@ -37,7 +37,7 @@ data Flag = Zero | Carry
 
 type Flags = Array Flag Bool
 
-defaultFlags :: Flags
+defaultFlags ∷ Flags
 defaultFlags = listArray (minBound, maxBound) (fmap (const False) [minBound..maxBound :: Bool])
 
 data Cond = Is Flag | Not Flag | Always

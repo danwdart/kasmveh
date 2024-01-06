@@ -1,140 +1,161 @@
-cabal-version:       3.4
+cabal-version:      3.4
+
 -- Newer versions complain
-name:                kasmveh
-version:             0.1.0.0
+name:               kasmveh
+version:            0.1.0.0
+
 -- synopsis:
-description:         Playing with assemblery stuff 
-homepage:            https://github.com/danwdart/kasmveh#readme
-license:             AGPL-3.0-only
+description:        Playing with assemblery stuff 
+homepage:           https://github.com/danwdart/kasmveh#readme
+license:            AGPL-3.0-only
+
 -- license-file:        LICENSE
-author:              Dan Dart
-maintainer:          cabal@dandart.co.uk
-copyright:           2019 Dan Dart
-category:            Web
-build-type:          Simple
-extra-source-files:
-                     README.md
+author:             Dan Dart
+maintainer:         cabal@dandart.co.uk
+copyright:          2019 Dan Dart
+category:           Web
+build-type:         Simple
+extra-source-files: README.md
 
 common shared-properties-base
-  hs-source-dirs:      src
-  default-language:    GHC2021
-  default-extensions:  DerivingStrategies, UnicodeSyntax, ImportQualifiedPost
-  ghcjs-options:       -dedupe
+  hs-source-dirs:     src
+  default-language:   GHC2021
+  default-extensions:
+    DerivingStrategies
+    ImportQualifiedPost
+    UnicodeSyntax
+
+  ghcjs-options:      -dedupe
 
 common shared-properties-lib
-  import: shared-properties-base
+  import:             shared-properties-base
   ghc-options:
-    -Weverything
-    -Wno-compat-unqualified-imports
-    -Wno-implicit-prelude
-    -Wno-inferred-safe-imports
-    -Wno-missing-deriving-strategies
-    -Wno-missing-export-lists
-    -Wno-missing-import-lists
-    -Wno-missing-kind-signatures
-    -Werror
-    -haddock
-  build-depends:       base >= 4.17.0.0 && < 5
+    -Weverything -Wno-compat-unqualified-imports -Wno-implicit-prelude
+    -Wno-inferred-safe-imports -Wno-missing-deriving-strategies
+    -Wno-missing-export-lists -Wno-missing-import-lists
+    -Wno-missing-kind-signatures -Werror -haddock
+
+  build-depends:      base >=4.17.0.0 && <5
   default-extensions:
     DerivingStrategies
-    UnicodeSyntax
-    NoGeneralizedNewtypeDeriving
     ImportQualifiedPost
+    NoGeneralizedNewtypeDeriving
+    UnicodeSyntax
 
 common shared-properties-unsafe
-  import: shared-properties-base
+  import:             shared-properties-base
   ghc-options:
-    -Weverything
-    -Wno-compat-unqualified-imports
-    -Wno-implicit-prelude
-    -Wno-inferred-safe-imports
-    -Wno-missing-deriving-strategies
-    -Wno-missing-export-lists
-    -Wno-missing-import-lists
-    -Wno-missing-kind-signatures
-    -Werror
-    -haddock
-    -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       base >= 4.17.0.0 && < 5
+    -Weverything -Wno-compat-unqualified-imports -Wno-implicit-prelude
+    -Wno-inferred-safe-imports -Wno-missing-deriving-strategies
+    -Wno-missing-export-lists -Wno-missing-import-lists
+    -Wno-missing-kind-signatures -Werror -haddock -threaded -rtsopts
+    -with-rtsopts=-N
+
+  build-depends:      base >=4.17.0.0 && <5
   default-extensions:
     DerivingStrategies
-    UnicodeSyntax
-    NoGeneralizedNewtypeDeriving
     ImportQualifiedPost
+    NoGeneralizedNewtypeDeriving
+    UnicodeSyntax
 
 common shared-properties-safe
-  import: shared-properties-unsafe
+  import:             shared-properties-unsafe
   default-extensions:
     DerivingStrategies
-    UnicodeSyntax
-    NoGeneralizedNewtypeDeriving
     ImportQualifiedPost
+    NoGeneralizedNewtypeDeriving
     Safe
+    UnicodeSyntax
 
 common shared-properties-nobase
-  import: shared-properties-base
+  import:             shared-properties-base
   ghc-options:
-    -Weverything
-    -Wno-compat-unqualified-imports
-    -Wno-implicit-prelude
-    -Wno-inferred-safe-imports
-    -Wno-missing-deriving-strategies
-    -Wno-missing-export-lists
-    -Wno-missing-import-lists
-    -Wno-missing-kind-signatures
-    -Werror
-    -haddock
-    -threaded -rtsopts -with-rtsopts=-N
+    -Weverything -Wno-compat-unqualified-imports -Wno-implicit-prelude
+    -Wno-inferred-safe-imports -Wno-missing-deriving-strategies
+    -Wno-missing-export-lists -Wno-missing-import-lists
+    -Wno-missing-kind-signatures -Werror -haddock -threaded -rtsopts
+    -with-rtsopts=-N
+
   default-extensions:
     DerivingStrategies
-    UnicodeSyntax
     ImportQualifiedPost
+    UnicodeSyntax
 
 -- TODO: unsafe?
 library
-  import: shared-properties-lib
+  import:          shared-properties-lib
+
   --ghc-options: -Wno-unused-packages
-  hs-source-dirs:      lib
-  build-depends: base >= 4.17.0.0 && < 5, array, containers, mtl, nonempty-containers, vector
-    -- pretty-simple
-  exposed-modules:     Code
-                     , Interpret
-                     , Machine
+  hs-source-dirs:  lib
+  build-depends:
+    , array
+    , base                 >=4.17.0.0 && <5
+    , containers
+    , mtl
+    , nonempty-containers
+    , vector
+
+  -- pretty-simple
+  exposed-modules:
+    Code
+    Interpret
+    Machine
 
 executable kasmveh
-  import: shared-properties-unsafe
-  main-is:             Main.hs
-  build-depends:       base >= 4.17.0.0 && < 5, kasmveh
+  import:        shared-properties-unsafe
+  main-is:       Main.hs
+  build-depends:
+    , base     >=4.17.0.0 && <5
+    , kasmveh
 
 executable kasmveh-dev
-  import: shared-properties-unsafe
-  hs-source-dirs:      src, lib
-  main-is:             Main.hs
-  build-depends:       base >= 4.17.0.0 && < 5, array, containers, mtl, nonempty-containers, vector
-  other-modules:       Code
-                     , Interpret
-                     , Machine
+  import:         shared-properties-unsafe
+  hs-source-dirs: src lib
+  main-is:        Main.hs
+  build-depends:
+    , array
+    , base                 >=4.17.0.0 && <5
+    , containers
+    , mtl
+    , nonempty-containers
+    , vector
+
+  other-modules:
+    Code
+    Interpret
+    Machine
 
 executable example1
-  import: shared-properties-unsafe
-  hs-source-dirs:      examples
-  main-is:             Example1.hs
-  build-depends:       base >= 4.17.0.0 && < 5, kasmveh
+  import:         shared-properties-unsafe
+  hs-source-dirs: examples
+  main-is:        Example1.hs
+  build-depends:
+    , base     >=4.17.0.0 && <5
+    , kasmveh
 
 executable fizzbuzz
-  import: shared-properties-unsafe
-  hs-source-dirs:      examples
-  main-is:             FizzBuzz.hs
-  build-depends:       base >= 4.17.0.0 && < 5, kasmveh
+  import:         shared-properties-unsafe
+  hs-source-dirs: examples
+  main-is:        FizzBuzz.hs
+  build-depends:
+    , base     >=4.17.0.0 && <5
+    , kasmveh
 
 test-suite test
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-  default-language:    GHC2021
-  default-extensions:  DerivingStrategies, UnicodeSyntax, NoGeneralizedNewtypeDeriving, ImportQualifiedPost
-  build-depends:       base >= 4.17.0.0 && < 5
-                     , kasmveh
-                     , hspec
-                     , QuickCheck
-  other-modules:       
+  type:               exitcode-stdio-1.0
+  hs-source-dirs:     test
+  main-is:            Spec.hs
+  default-language:   GHC2021
+  default-extensions:
+    DerivingStrategies
+    ImportQualifiedPost
+    NoGeneralizedNewtypeDeriving
+    UnicodeSyntax
+
+  build-depends:
+    , base        >=4.17.0.0 && <5
+    , hspec
+    , kasmveh
+    , QuickCheck
+
+  other-modules:
