@@ -32,7 +32,7 @@ interpretInstruction instruction = do
         Halt cond -> interpretWhen cond flags' $ do
             tell ["halt"]
 
-interpret ∷ (MonadReader (Array Addr Instruction) m, MonadState (CPU, RAM) m, MonadWriter [String] m, MonadIO m) ⇒ m ()
+interpret ∷ (MonadReader (Array Addr Instruction) m, MonadState (CPU, RAM) m, MonadWriter [String] m) ⇒ m ()
 interpret = do
     ip' <- gets (ip . fst)
     instr <- asks (! ip')

@@ -90,10 +90,10 @@ library
   build-depends:
     , array
     , base                 >=4.17.0.0 && <5
-    , containers
+    -- , containers
     , mtl
     , nonempty-containers
-    , vector
+    -- , vector
 
   -- pretty-simple
   exposed-modules:
@@ -115,31 +115,34 @@ executable kasmveh-dev
   build-depends:
     , array
     , base                 >=4.17.0.0 && <5
-    , containers
+    -- , containers
     , mtl
     , nonempty-containers
-    , vector
+    -- , vector
 
   other-modules:
     Code
     Interpret
     Machine
 
-executable example1
-  import:         shared-properties-unsafe
-  hs-source-dirs: examples
-  main-is:        Example1.hs
-  build-depends:
-    , base     >=4.17.0.0 && <5
-    , kasmveh
+-- executable example1
+--   import:         shared-properties-unsafe
+--   hs-source-dirs: examples
+--   main-is:        Example1.hs
+--   build-depends:
+--     , base     >=4.17.0.0 && <5
+--     , kasmveh
+--     , pretty-simple-- 
 
-executable fizzbuzz
-  import:         shared-properties-unsafe
-  hs-source-dirs: examples
-  main-is:        FizzBuzz.hs
-  build-depends:
-    , base     >=4.17.0.0 && <5
-    , kasmveh
+-- executable fizzbuzz
+--   import:         shared-properties-unsafe
+--   hs-source-dirs: examples
+--   main-module
+--   main-is:        FizzBuzz.hs
+--   build-depends:
+--     , base     >=4.17.0.0 && <5
+--     , kasmveh
+--     , pretty-simple
 
 test-suite test
   type:               exitcode-stdio-1.0
