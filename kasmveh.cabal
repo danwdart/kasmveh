@@ -36,7 +36,7 @@ common shared-properties-lib
     -Wno-missing-kind-signatures -Wno-all-missed-specialisations
     -Werror -haddock
 
-  build-depends:      base >=4.18.0.0 && <5
+  build-depends:      base >=4.18.2.0 && <5
   default-extensions:
     DerivingStrategies
     ImportQualifiedPost
@@ -52,7 +52,7 @@ common shared-properties-unsafe
     -Wno-missing-kind-signatures -Wno-all-missed-specialisations
     -Werror -haddock -threaded -rtsopts -with-rtsopts=-N
 
-  build-depends:      base >=4.18.0.0 && <5
+  build-depends:      base >=4.18.2.0 && <5
   default-extensions:
     DerivingStrategies
     ImportQualifiedPost
@@ -90,7 +90,7 @@ library
   hs-source-dirs:  lib
   build-depends:
     , array
-    , base                 >=4.18.0.0 && <5
+    , base                 >=4.18.2.0 && <5
     , mtl
     , nonempty-containers
 
@@ -107,7 +107,7 @@ executable kasmveh
   import:        shared-properties-unsafe
   main-is:       Main.hs
   build-depends:
-    , base     >=4.18.0.0 && <5
+    , base     >=4.18.2.0 && <5
     , kasmveh
 
 executable kasmveh-dev
@@ -116,7 +116,7 @@ executable kasmveh-dev
   main-is:        Main.hs
   build-depends:
     , array
-    , base                 >=4.18.0.0 && <5
+    , base                 >=4.18.2.0 && <5
     , mtl
     , nonempty-containers
 
@@ -133,7 +133,7 @@ executable kasmveh-dev
 --   hs-source-dirs: examples
 --   main-is:        Example1.hs
 --   build-depends:
---     , base     >=4.18.0.0 && <5
+--     , base     >=4.18.2.0 && <5
 --     , kasmveh
 --     , pretty-simple-- 
 
@@ -143,7 +143,7 @@ executable kasmveh-dev
 --   main-module
 --   main-is:        FizzBuzz.hs
 --   build-depends:
---     , base     >=4.18.0.0 && <5
+--     , base     >=4.18.2.0 && <5
 --     , kasmveh
 --     , pretty-simple
 
@@ -159,7 +159,7 @@ test-suite test
     UnicodeSyntax
 
   build-depends:
-    , base        >=4.18.0.0 && <5
+    , base        >=4.18.2.0 && <5
     , hspec
     , kasmveh
     , QuickCheck
