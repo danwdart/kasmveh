@@ -28,8 +28,7 @@ let
     nativeBuildInputs = tools.defaultBuildTools ++ [ nixpkgs.gettext nixpkgs.nodejs_20 nixpkgs.php82 nixpkgs.tinycc ];
     withHoogle = false;
   };
-  exe = lib.justStaticExecutables (myHaskellPackages.kasmveh);
-in
+  in
 {
   inherit shell;
   kasmveh = lib.justStaticExecutables (myHaskellPackages.kasmveh);
