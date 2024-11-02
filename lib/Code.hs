@@ -1,4 +1,3 @@
-{-# LANGUAGE GeneralisedNewtypeDeriving #-}
 {-# LANGUAGE Unsafe                     #-}
 {-# OPTIONS_GHC -Wno-unsafe #-}
 
