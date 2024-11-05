@@ -20,8 +20,7 @@ extra-source-files: README.md
 common shared-properties-base
   hs-source-dirs:     src
   default-language:   GHC2024
-  default-extensions:
-    UnicodeSyntax
+  default-extensions: UnicodeSyntax
   ghcjs-options:      -dedupe
 
 common shared-properties-lib
@@ -37,8 +36,7 @@ common shared-properties-lib
     -Werror -haddock
 
   build-depends:      base >=4.20.0.0 && <5
-  default-extensions:
-    UnicodeSyntax
+  default-extensions: UnicodeSyntax
 
 common shared-properties-unsafe
   import:             shared-properties-base
@@ -53,8 +51,7 @@ common shared-properties-unsafe
     -Werror -haddock -threaded -rtsopts -with-rtsopts=-N
 
   build-depends:      base >=4.20.0.0 && <5
-  default-extensions:
-    UnicodeSyntax
+  default-extensions: UnicodeSyntax
 
 common shared-properties-safe
   import:             shared-properties-unsafe
@@ -75,8 +72,7 @@ common shared-properties-nobase
     -Wno-missing-poly-kind-signatures -Wno-unrecognised-warning-flags
     -Werror -haddock -threaded -rtsopts -with-rtsopts=-N
 
-  default-extensions:
-    UnicodeSyntax
+  default-extensions: UnicodeSyntax
 
 -- TODO: unsafe?
 library
@@ -151,10 +147,12 @@ test-suite test
   default-extensions:
     NoGeneralizedNewtypeDeriving
     UnicodeSyntax
+
   build-depends:
     , base        >=4.20.0.0 && <5
     , hspec
     , kasmveh
     , QuickCheck
+
   build-tool-depends: hspec-discover:hspec-discover
   other-modules:

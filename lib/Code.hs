@@ -1,4 +1,4 @@
-{-# LANGUAGE Unsafe                     #-}
+{-# LANGUAGE Unsafe #-}
 {-# OPTIONS_GHC -Wno-unsafe #-}
 
 
