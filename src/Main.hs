@@ -19,6 +19,6 @@ code = Code.do
 
 main ∷ IO ()
 main = do
-    (_machine, debug) <- run . initial $ code
-    -- print machine
+    (machine, debug) <- run . initial $ code
+    print machine
     mapM_ print debug
