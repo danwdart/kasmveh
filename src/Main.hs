@@ -6,6 +6,7 @@ module Main (main) where
 
 import Code
 import Data.Char
+import Data.Foldable
 import Interpret
 import Machine
 
@@ -21,4 +22,4 @@ main ∷ IO ()
 main = do
     (machine, debug) <- run . initial $ code
     print machine
-    mapM_ print debug
+    traverse_ print debug

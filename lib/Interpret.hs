@@ -10,7 +10,7 @@ import Control.Monad.RWS
 -- import Control.Monad.State
 -- import Control.Monad.Writer
 import Data.Array        as Array
-import Data.Foldable     (toList)
+import Data.Foldable     (toList, traverse_)
 -- import Data.Sequence.NonEmpty qualified as NES
 -- import Data.Vector (Vector)
 -- import Data.Vector qualified as V
@@ -50,6 +50,6 @@ run m@Machine { cpu = cpu', ram = ram', rom = rom' } = do
 
     ((), (cpu'', ram''), written) <- runRWST interpret code (cpu', ram')
 
-    Prelude.mapM_ (liftIO . print) written
+    traverse_ (liftIO . print) written
 
     pure (m { cpu = cpu'', ram = ram'' }, written)
