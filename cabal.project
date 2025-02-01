@@ -1,3 +1,6 @@
 packages: *.cabal
 benchmarks: True
 tests: True
+-- allow metadata revision for pretty to allow deepseq newer
+-- allow-newer: deepseq
+allow-older: array
