@@ -19,6 +19,8 @@ extra-source-files: README.md
 
 common shared-properties-base
   hs-source-dirs:     src
+  if arch(javascript)
+    js-sources: jsbits/emcc-config.js
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
   ghcjs-options:      -dedupe
@@ -64,6 +66,8 @@ common shared-properties-safe
 
 common shared-properties-nobase
   import:             shared-properties-base
+  if arch(javascript)
+    js-sources: jsbits/emcc-config.js
   if !os(wasi)
     ghc-options: -threaded -rtsopts -with-rtsopts=-N 
   ghc-options:
