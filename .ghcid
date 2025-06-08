@@ -1,1 +1,1 @@
--l -arMain.main -c "cabal repl kasmveh:exe:kasmveh kasmveh:lib:kasmveh --ghc-options='-Wno-prepositive-qualified-module -Wno-missing-local-signatures'" --restart kasmveh.cabal --reload .env --restart cabal.project
+-l -arMain.main -c "cabal new-repl kasmveh:exe:kasmveh kasmveh:lib:kasmveh --ghc-options='-Wno-prepositive-qualified-module -Wno-missing-local-signatures'" --restart kasmveh.cabal --reload .env --restart cabal.project
