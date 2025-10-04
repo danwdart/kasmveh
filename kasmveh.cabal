@@ -38,7 +38,7 @@ common shared-properties-lib
     -Wno-missing-kind-signatures -Wno-missing-poly-kind-signatures
     -Wno-unrecognised-warning-flags -Werror -haddock
 
-  build-depends:      base ^>=4.21.0.0
+  build-depends:      base >=4.21.0.0 && <4.23.0.0
   default-extensions: UnicodeSyntax
 
 common shared-properties-unsafe
@@ -56,7 +56,7 @@ common shared-properties-unsafe
     -Wno-missing-kind-signatures -Wno-missing-poly-kind-signatures
     -Wno-unrecognised-warning-flags -Werror -haddock
 
-  build-depends:      base ^>=4.21.0.0
+  build-depends:      base >=4.21.0.0 && <4.23.0.0
   default-extensions: UnicodeSyntax
 
 common shared-properties-safe
@@ -94,7 +94,7 @@ library
   hs-source-dirs:  lib
   build-depends:
     , array                ^>=0.5.8.0
-    , base                 ^>=4.21.0.0
+    , base                 >=4.21.0.0 && <4.23.0.0
     , mtl                  ^>=2.3.1
     , nonempty-containers  ^>=0.3.4.5
 
@@ -111,7 +111,7 @@ executable kasmveh
   import:        shared-properties-unsafe
   main-is:       Main.hs
   build-depends:
-    , base     ^>=4.21.0.0
+    , base     >=4.21.0.0 && <4.23.0.0
     , kasmveh  ^>=0.2.0.0
 
 -- executable example1
@@ -119,7 +119,7 @@ executable kasmveh
 --   hs-source-dirs: examples
 --   main-is:        Example1.hs
 --   build-depends:
---     , base     ^>=4.21.0.0
+--     , base     >=4.21.0.0 && <4.23.0.0
 --     , kasmveh
 --     , pretty-simple-- 
 
@@ -129,7 +129,7 @@ executable kasmveh
 --   main-module
 --   main-is:        FizzBuzz.hs
 --   build-depends:
---     , base     ^>=4.21.0.0
+--     , base     >=4.21.0.0 && <4.23.0.0
 --     , kasmveh
 --     , pretty-simple ^>=4.1.3.0
 
@@ -146,7 +146,7 @@ test-suite test
     UnicodeSyntax
 
   build-depends:
-    , base        ^>=4.21.0.0
+    , base        >=4.21.0.0 && <4.23.0.0
     , hspec       ^>=2.11.10
     , kasmveh     ^>=0.2.0.0
     , QuickCheck  ^>=2.16.0.0
