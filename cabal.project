@@ -1,7 +1,7 @@
 packages: *.cabal
 benchmarks: True
 tests: True
-allow-newer: base, containers, ghc-bignum, template-haskell
+allow-newer: base, containers, ghc-bignum, template-haskell, QuickCheck
 -- allow metadata revision for pretty to allow deepseq newer
 -- -- allow-newer: deepseq
 -- allow-older: array
