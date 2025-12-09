@@ -147,7 +147,7 @@ test-suite test
 
   build-depends:
     , base        >=4.21 && <4.23
-    , hspec       ^>=2.11.10
+    , hspec       ^>=2.11.15
     , kasmveh     ^>=0.2
     , QuickCheck  ^>=2.17
 
